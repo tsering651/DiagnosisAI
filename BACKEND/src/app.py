@@ -19,7 +19,11 @@ from src.utils.overlay import overlay_heatmap
 #app = Flask(__name__)
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 
-CORS(app, resources={r"/*": {"origins": "https://diagnosisai-b9xf.onrender.com/"}})
+CORS(app, resources={r"/*": {"origins": [
+    "http://localhost:5173", 
+    "https://diagnosisai-b9xf.onrender.com"
+]}})
+
 
 
 
