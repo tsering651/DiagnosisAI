@@ -1,9 +1,15 @@
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.models import load_model
 import numpy as np
+import os
 
-model_path = './Models/chest_xray_model.h5'
-model = load_model(model_path)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the full path to the model
+MODEL_PATH = os.path.join(BASE_DIR, "Models", "lung_cancer_model.h5")
+
+# Load the model
+model = load_model(MODEL_PATH)
 
 def predict_pneumonia(img):
     img = img.resize((150, 150))

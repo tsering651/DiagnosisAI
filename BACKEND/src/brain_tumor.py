@@ -37,7 +37,15 @@ def crop_brain_contour(image):
     new_image = image[extTop[1]:extBot[1], extLeft[0]:extRight[0]]
     return new_image
 
-model = load_model('./Models/brain_tumor_detection_model.keras')
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the full path to the model
+MODEL_PATH = os.path.join(BASE_DIR, "Models", "brain_tumor_detection_model.keras")
+
+# Load the model
+model = load_model(MODEL_PATH)
 
 # def process_brain_tumor_diagnosis(image):
 #     image=crop_brain_contour(image)

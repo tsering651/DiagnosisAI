@@ -2,7 +2,18 @@ import cv2
 import numpy as np
 from tensorflow.keras.models import load_model
 
-model = load_model("./Models/lung_cancer_model.h5")
+
+import os
+
+
+# Get the absolute path of the current file
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the full path to the model
+MODEL_PATH = os.path.join(BASE_DIR, "Models", "lung_cancer_model.h5")
+
+# Load the model
+model = load_model(MODEL_PATH)
 
 def predict_lung_cancer(image):
     print("Lung cancer image shape ", image.shape)

@@ -19,7 +19,9 @@ from utils.overlay import overlay_heatmap
 #app = Flask(__name__)
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+
 
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
