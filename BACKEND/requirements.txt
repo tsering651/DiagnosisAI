@@ -50,3 +50,5 @@ urllib3
 Werkzeug
 wheel
 wrapt
+gunicorn
+
