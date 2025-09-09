@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+
+
 const DiagnosisForm = () => {
   const [selectedType, setSelectedType] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
@@ -19,35 +22,96 @@ const DiagnosisForm = () => {
     setSelectedType(event.target.value);
   };
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+
+  //   if (!selectedImage || !selectedType) {
+  //     console.log('Please select an image and diagnosis type');
+  //     return;
+  //   }
+
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append('image', selectedImage);
+  //     formData.append('type', selectedType);
+
+  //     const response = await fetch(`${backendURL}/diagnose`, {
+  //       method: 'POST',
+  //       body: formData, // DO NOT set headers manually for FormData
+  //     });
+
+  //     if (!response.ok) throw new Error('Failed to send data to backend');
+
+  //     const responseData = await response.json();
+  //     const { result, heatmap_url } = responseData;
+
+  //     if (selectedType === 'type1') {
+  //       let accuracyPercentage = (result * 100).toFixed(2);
+  //       if (result <= 0.5) accuracyPercentage = 100 - accuracyPercentage;
+  //       setDiagnosisResult(result > 0.5 ? '🧠 Brain tumor detected' : '🧠 Brain tumor not detected');
+  //       setAccuracy(accuracyPercentage);
+  //       setGradcamImage(`http://localhost:5000${heatmap_url}`);
+  //     } else if (selectedType === 'type2') {
+  //       const labels = ['adenocarcinoma', 'large_cell_carcinoma', 'normal', 'squamous_cell_carcinoma'];
+  //       setDiagnosisResult(`🫁 ${labels[result]}`);
+  //       setAccuracy(null);
+  //       setGradcamImage(null);
+  //     } else if (selectedType === 'type4') {
+  //       const classLabels = {
+  //         0: 'Actinic keratoses and intraepithelial carcinomae',
+  //         1: 'Basal cell carcinoma',
+  //         2: 'Benign keratosis-like lesions',
+  //         3: 'Dermatofibroma',
+  //         4: 'Melanocytic nevi',
+  //         5: 'Pyogenic granulomas and hemorrhage',
+  //         6: 'Melanoma',
+  //       };
+  //       setDiagnosisResult(`🩺 ${classLabels[result]}`);
+  //       setAccuracy(null);
+  //       setGradcamImage(null);
+  //     } else if (selectedType === 'type3') {
+  //       let accuracyPercentage = (result * 100).toFixed(2);
+  //       if (result <= 0.5) accuracyPercentage = 100 - accuracyPercentage;
+  //       setDiagnosisResult(result > 0.5 ? '🫁 Pneumonia detected' : '🫁 Pneumonia not detected');
+  //       setAccuracy(accuracyPercentage);
+  //       setGradcamImage(null);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error.message);
+  //   }
+  // };
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (!selectedImage || !selectedType) {
       console.log('Please select an image and diagnosis type');
       return;
     }
-
+  
     try {
       const formData = new FormData();
       formData.append('image', selectedImage);
       formData.append('type', selectedType);
-
-      const response = await fetch('http://localhost:5000/diagnose', {
+  
+      const backendURL = import.meta.env.VITE_BACKEND_URL;
+  
+      const response = await fetch(`${backendURL}/diagnose`, {
         method: 'POST',
         body: formData,
       });
-
+  
       if (!response.ok) throw new Error('Failed to send data to backend');
-
+  
       const responseData = await response.json();
       const { result, heatmap_url } = responseData;
-
+  
+      // Handle results (same as your current logic)
       if (selectedType === 'type1') {
         let accuracyPercentage = (result * 100).toFixed(2);
         if (result <= 0.5) accuracyPercentage = 100 - accuracyPercentage;
         setDiagnosisResult(result > 0.5 ? '🧠 Brain tumor detected' : '🧠 Brain tumor not detected');
         setAccuracy(accuracyPercentage);
-        setGradcamImage(`http://localhost:5000${heatmap_url}`);
+        setGradcamImage(`${backendURL}${heatmap_url}`);
       } else if (selectedType === 'type2') {
         const labels = ['adenocarcinoma', 'large_cell_carcinoma', 'normal', 'squamous_cell_carcinoma'];
         setDiagnosisResult(`🫁 ${labels[result]}`);
