@@ -23,11 +23,16 @@ app = Flask(__name__, static_url_path='/static', static_folder='static')
 #     "http://localhost:5173", 
 #     "https://diagnosisai-b9xf.onrender.com"
 # ]}})
-CORS(app, origins=[
-    "http://localhost:5173",
-    "https://diagnosisai-b9xf.onrender.com"
-])
-
+CORS(
+    app,
+    resources={r"/*": {"origins": [
+        "http://localhost:5173",
+        "https://diagnosisai-b9xf.onrender.com"
+    ]}},
+    supports_credentials=True,
+    allow_headers="*",
+    methods=["GET", "POST", "OPTIONS", "PUT", "DELETE"]
+)
 
 
 
