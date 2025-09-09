@@ -1,8 +1,8 @@
 import tensorflow as tf
 from tensorflow.keras.layers import Conv2D, Input, ZeroPadding2D, BatchNormalization, Activation, MaxPooling2D, Flatten, Dense
 from tensorflow.keras.models import load_model
-from utils.gradcam import make_gradcam_heatmap
-from utils.overlay import overlay_heatmap
+from src.utils.gradcam import make_gradcam_heatmap
+from src.utils.overlay import overlay_heatmap
 from tensorflow.keras.callbacks import TensorBoard, ModelCheckpoint
 import cv2
 import imutils
