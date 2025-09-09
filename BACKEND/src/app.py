@@ -8,13 +8,13 @@ import traceback
 
 from werkzeug.utils import secure_filename
 
-from brain_tumor import process_brain_tumor_diagnosis
-from pneumonia import predict_pneumonia
-from lung_cancer import predict_lung_cancer
-from skin_cancer import skin_cancer_classification
+from src.brain_tumor import process_brain_tumor_diagnosis
+from src.pneumonia import predict_pneumonia
+from src.lung_cancer import predict_lung_cancer
+from src.skin_cancer import skin_cancer_classification
 
-from utils.gradcam import make_gradcam_heatmap
-from utils.overlay import overlay_heatmap
+from src.utils.gradcam import make_gradcam_heatmap
+from src.utils.overlay import overlay_heatmap
 
 #app = Flask(__name__)
 app = Flask(__name__, static_url_path='/static', static_folder='static')
